@@ -11,8 +11,10 @@
       padding: 0;
       font-family: "Comic Sans MS", cursive, sans-serif;
 
-      /* 🟦 FIX: Enhetlig blå bakgrund i både html och body */
-      background-color: #8BC6D5;
+      /* 🖼️ JPEG-bakgrund + fallback */
+      background: url('images/bakgrund.jpg') top center no-repeat;
+      background-size: cover;
+      background-color: #8fd3f4;
     }
 
     h1 {
@@ -30,27 +32,27 @@
 
     .countdown {
       font-size: 1.8em;
-      color: #ffffff;
-      text-shadow: 2px 2px 6px #000;
+      color: #000; /* 🔧 Svart text */
+      text-shadow: 1px 1px 4px #ffffff;
       text-align: center;
       margin-top: 1rem;
     }
 
     .footer {
       text-align: center;
-      color: #fff000;
-      font-size: 1.5em;
+      color: #000; /* 🔧 Svart text */
+      font-size: 2.2em; /* 🔧 Större */
       margin-top: 4rem;
-      text-shadow: 1px 1px 3px #000;
+      text-shadow: 2px 2px 4px #ffffff;
     }
 
     #sun {
       position: absolute;
-      bottom: 710px;
+      top: 50px;
       left: 20px;
       width: 80px;
-      animation: spin 8s linear infinite;
-      z-index: 3;
+      animation: spin 40s linear infinite; /* 🔧 Långsam snurr */
+      z-index: 999; /* 🔧 Översta lagret */
     }
 
     @keyframes spin {
@@ -69,7 +71,7 @@
 
     .walking-you {
       position: absolute;
-      bottom: 60px;
+      bottom: 10px; /* 🔧 Sänkt så den går nere vid stranden */
       width: 120px;
       height: auto;
       animation: walk-loop 15s linear infinite;
@@ -84,28 +86,34 @@
 </head>
 <body>
 
-  <!-- 🌞 Solen -->
+  <!-- ☀️ Solen (överst och snurrar långsamt) -->
   <img id="sun" src="images/sol.gif" alt="Snurrande sol" />
 
+  <!-- 🏖️ Rubrik -->
   <h1>Semester...</h1>
 
+  <!-- ⏳ Nedräkning -->
   <div class="countdown" id="countdown">Snart tillbaka.</div>
 
+  <!-- 👤 Gående GIF (sänkt position) -->
   <img class="walking-you" src="images/semester-jag.gif" alt="Semester-Jag" />
+
+  <!-- 🌊 Waves med strand och palm -->
   <img class="waves" src="images/waves.gif" alt="Vågor" />
 
-  <!-- 🎵 Ljud med låg volym (direktstart med JS-trick) -->
+  <!-- 🎵 Ljud -->
   <audio id="bgMusic" autoplay loop>
     <source src="audio/semester.mp3" type="audio/mpeg" />
     Din webbläsare stödjer inte ljud.
   </audio>
 
+  <!-- ☀️ Sommarhälsning -->
   <div class="footer">
     Trevlig sommar!
   </div>
 
   <script>
-    // ⏰ Nedräkning
+    // ⏱️ Countdown
     const cd = document.getElementById("countdown");
     const target = new Date("2025-07-14T15:00:00");
     function tick() {
@@ -124,11 +132,10 @@
     setInterval(tick, 1000);
     tick();
 
-    // 🔉 Sätt volym och spela om möjligt
+    // 🔉 Ljudstart + låg volym
     const music = document.getElementById("bgMusic");
     music.volume = 0.2;
 
-    // Försök spela direkt (funkar ibland i desktop), annars vid klick
     music.play().catch(() => {
       document.addEventListener("click", () => {
         music.play();
