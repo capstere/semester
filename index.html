@@ -11,10 +11,11 @@
       margin: 0;
       padding: 0;
       font-family: 'Roboto', sans-serif;
-      background: url('images/himmel.jpg') center top no-repeat;
+      background: url('images/himmel.jpg') center top no-repeat fixed;
       background-size: cover;
       background-color: #8fd3f4;
       height: 100%;
+      overflow-x: hidden;
     }
 
     main {
@@ -25,6 +26,8 @@
       padding: 2rem;
       min-height: 80vh;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
@@ -37,29 +40,30 @@
     }
 
     .countdown {
-    font-size: clamp(1rem, 3vw, 1.8rem);
-    margin-top: 2rem;
-    background-color: rgba(255, 255, 255, 0.6);
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    white-space: pre-line;
-  }
-    
+      font-size: clamp(1rem, 3vw, 1.8rem);
+      margin-top: 2rem;
+      background-color: rgba(255, 255, 255, 0.6);
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      white-space: pre-line;
+    }
+
     .footer {
       font-size: clamp(1.2rem, 4vw, 2rem);
       margin: 4rem 0 2rem;
       text-shadow: 1px 1px 2px #fff;
-      text-align: center;
+      z-index: 2;
+      position: relative;
     }
 
     #sun {
-      position: absolute;
+      position: fixed;
       top: 30px;
       left: 20px;
       width: 80px;
       animation: spin 40s linear infinite;
-      z-index: 99;
+      z-index: 100;
     }
 
     @keyframes spin {
@@ -77,7 +81,7 @@
     }
 
     .walking-you {
-      position: absolute;
+      position: fixed;
       bottom: 20px;
       width: 120px;
       animation: walk-loop 15s linear infinite;
@@ -91,16 +95,8 @@
 
     .music-control {
       margin-top: 2rem;
-    }
-
-    @media (max-width: 600px) {
-      #sun {
-        display: none;
-      }
-
-      .walking-you {
-        width: 80px;
-      }
+      z-index: 2;
+      position: relative;
     }
   </style>
 </head>
@@ -109,7 +105,7 @@
   <img id="sun" src="images/sol.gif" alt="Snurrande sol" />
 
   <main>
-    <h1>JESP ÄR PÅ SEMESTER</h1>
+    <h1>JESP är SEMESTER</h1>
     <div class="countdown" id="countdown">Snart tillbaka.</div>
 
     <div class="music-control">
@@ -144,8 +140,7 @@
             h = Math.floor(diff % 86400000 / 3600000),
             m = Math.floor(diff % 3600000 / 60000),
             s = Math.floor(diff % 60000 / 1000);
-    cd.textContent = `${d} dagar ${h} tim ${m} min ${s} sek \n återstår tills jag sitter i mitt hörn igen`;
-
+      cd.textContent = `${d} dagar ${h} tim ${m} min ${s} sek kvar\ntills solbrännan bleknar`;
     }
 
     setInterval(tick, 1000);
