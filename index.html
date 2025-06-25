@@ -13,6 +13,7 @@
       color: magenta;
       background: url('images/bakgrund.jpg') no-repeat center center fixed;
       background-size: cover;
+      overflow-x: hidden;
     }
 
     h1 {
@@ -56,45 +57,76 @@
 
     .walking-you {
       position: absolute;
-      bottom: 0;
+      bottom: 50px; /* Ligger ovanför vågorna */
       width: 120px;
       height: auto;
       animation: walk-loop 15s linear infinite;
-      z-index: 1000;
+      z-index: 10;
     }
 
     @keyframes walk-loop {
       0% { left: -150px; }
       100% { left: 100vw; }
     }
+
+    /* 🌊 Vågor längst ner på sidan */
+    .waves {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 1;
+    }
+
+    /* 🌴 Palm i vänstra hörnet */
+    .palm {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 150px;
+      animation: sway 3s ease-in-out infinite alternate;
+      z-index: 2;
+    }
+
+    @keyframes sway {
+      0% { transform: rotate(-2deg); }
+      100% { transform: rotate(2deg); }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Snurrande sol GIF -->
+  <!-- ☀️ Snurrande sol -->
   <img id="sun" src="images/sol.gif" alt="Snurrande sol" />
 
-  <!-- Titel -->
+  <!-- 🏝️ Sajtens rubrik -->
   <h1>SEMESTERLÄGE AKTIVT!!!</h1>
 
-  <!-- Nedräkning -->
+  <!-- ⏳ Nedräkning -->
   <div class="countdown" id="countdown">Laddar karaibiskt solsken...</div>
 
-  <!-- Din animerade figur (GIF) -->
+  <!-- 👤 Du själv som går (GIF med transparens) -->
   <img class="walking-you" src="images/semester-jag.gif" alt="Semester-Jag" />
 
-  <!-- Ljud (MIDI) -->
+  <!-- 🌴 Palm (GIF eller PNG) i nedre vänstra hörnet -->
+  <img class="palm" src="images/palm.gif" alt="Palm som svajar" />
+
+  <!-- 🌊 Vågor längst ner (loopande GIF) -->
+  <img class="waves" src="images/waves.gif" alt="Vågor" />
+
+  <!-- 🎵 MIDI-ljud -->
   <audio autoplay loop>
     <source src="audio/semester.mid" type="audio/midi">
     Din webbläsare stödjer inte MIDI. Tråkigt.
   </audio>
 
-  <!-- Footer -->
+  <!-- 📝 Text längst ner -->
   <div class="footer">
     Sluta scanna, börja jobba... eller kanske inte.
   </div>
 
-  <!-- Countdown Script -->
+  <!-- ⏰ Countdown Script -->
   <script>
     const cd = document.getElementById("countdown");
     const target = new Date("2025-07-14T15:00:00");
