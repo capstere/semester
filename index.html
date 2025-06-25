@@ -109,7 +109,7 @@
     <div class="countdown" id="countdown">Snart tillbaka.</div>
 
     <div class="music-control">
-      <button id="playMusic">▶ Spela musik</button>
+      <button id="playMusic">▶Play</button>
     </div>
   </main>
 
@@ -140,7 +140,7 @@
             h = Math.floor(diff % 86400000 / 3600000),
             m = Math.floor(diff % 3600000 / 60000),
             s = Math.floor(diff % 60000 / 1000);
-      cd.textContent = `${d} dagar ${h} tim ${m} min ${s} sek \ntills jag sitter i mitt hörn / JESP.`;
+      cd.textContent = `${d} dagar ${h} tim ${m} min ${s} sek \ntills jag sitter i mitt hörn igen / JESP`;
     }
 
     setInterval(tick, 1000);
