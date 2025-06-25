@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🌴 SEMESTERLÄGE AKTIVT 🌞</title>
+  <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      color: magenta;
+      background: url('DIN-BAKGRUNDSBILD-HÄR.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    h1 {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 3em;
+      animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { visibility: hidden; }
+    }
+
+    #sun {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+      animation: spin 8s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .countdown {
+      font-size: 2em;
+      color: cyan;
+      text-shadow: 2px 2px 5px #000;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .footer {
+      text-align: center;
+      color: yellow;
+      font-size: 1.5em;
+      margin-top: 4rem;
+    }
+
+    .walking-you {
+      position: absolute;
+      bottom: 0;
+      width: 120px;
+      height: auto;
+      animation: walk-loop 15s linear infinite;
+    }
+
+    @keyframes walk-loop {
+      0% { left: -150px; }
+      100% { left: 100vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <img id="sun" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Snurrande sol" />
+  <h1>SEMESTERLÄGE AKTIVT!!!</h1>
+  <div class="countdown" id="countdown">Laddar karaibiskt solsken...</div>
+
+  <!-- 🔁 Här lägger du in din "du själv"-bild -->
+  <img class="walking-you" src="DIN-FIGUR-BILD-HÄR.png" alt="Semester-Jag" />
+
+  <!-- 🎵 MIDI-ljud (frivilligt) -->
+  <audio autoplay loop>
+    <source src="https://www.midiworld.com/download/2819" type="audio/midi">
+    Din webbläsare stödjer inte MIDI. Tråkigt. 
+  </audio>
+
+  <div class="footer">
+    Sluta scanna, börja jobba... eller kanske inte.
+  </div>
+
+  <script>
+    const cd = document.getElementById("countdown");
+    const target = new Date("2025-07-14T15:00:00");
+    function tick() {
+      const now = new Date();
+      const diff = target - now;
+      if (diff <= 0) {
+        cd.textContent = "JAG ÄR TILLBAKA, SÄG HEJ ELLER... GÖR INTE DET.";
+        return;
+      }
+      const d = Math.floor(diff / 86400000),
+            h = Math.floor(diff % 86400000 / 3600000),
+            m = Math.floor(diff % 3600000 / 60000),
+            s = Math.floor(diff % 60000 / 1000);
+      cd.textContent = `${d} dagar ${h} tim ${m} min ${s} sek kvar tills solbrännan bleknar`;
+    }
+    setInterval(tick, 1000);
+    tick();
+  </script>
+
+</body>
+</html>
