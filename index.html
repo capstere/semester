@@ -10,9 +10,7 @@
       margin: 0;
       padding: 0;
       font-family: "Comic Sans MS", cursive, sans-serif;
-      color: magenta;
-      background: url('images/bakgrund.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background-color: #8fd3f4; /* 🔧 Matcha detta till färgen i din waves.gif himmel */
       overflow-x: hidden;
     }
 
@@ -20,7 +18,9 @@
       margin-top: 4rem;
       text-align: center;
       font-size: 3em;
+      color: #000; /* 🔧 Bättre kontrast */
       animation: blink 1s step-start infinite;
+      text-shadow: 2px 2px 4px #ffffff;
     }
 
     @keyframes blink {
@@ -29,10 +29,11 @@
 
     #sun {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 100px;
+      bottom: 710px; /* 🔧 Ungefär exakt ovanför din 710px hög waves.gif */
+      left: 20px; /* 🔧 Flyttad från höger till vänster */
+      width: 80px;
       animation: spin 8s linear infinite;
+      z-index: 3;
     }
 
     @keyframes spin {
@@ -41,23 +42,24 @@
     }
 
     .countdown {
-      font-size: 2em;
-      color: cyan;
-      text-shadow: 2px 2px 5px #000;
+      font-size: 1.8em;
+      color: #ffffff;
+      text-shadow: 2px 2px 6px #000;
       text-align: center;
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
 
     .footer {
       text-align: center;
-      color: yellow;
+      color: #fff000;
       font-size: 1.5em;
       margin-top: 4rem;
+      text-shadow: 1px 1px 3px #000;
     }
 
     .walking-you {
       position: absolute;
-      bottom: 50px; /* Ligger ovanför vågorna */
+      bottom: 60px; /* 🔧 Justeras så den går på stranden i waves.gif */
       width: 120px;
       height: auto;
       animation: walk-loop 15s linear infinite;
@@ -69,7 +71,6 @@
       100% { left: 100vw; }
     }
 
-    /* 🌊 Vågor längst ner på sidan */
     .waves {
       position: fixed;
       bottom: 0;
@@ -78,38 +79,46 @@
       height: auto;
       z-index: 1;
     }
+
+    /* Valfritt: moln du lägger till själv */
+    .moln {
+      position: absolute;
+      width: 100px;
+      top: 150px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- ☀️ Snurrande sol -->
+  <!-- 🌞 Solen – nu placerad till vänster ovanför vågorna -->
   <img id="sun" src="images/sol.gif" alt="Snurrande sol" />
 
-  <!-- 🏝️ Sajtens rubrik -->
+  <!-- 🏖️ Rubrik -->
   <h1>Semester...</h1>
 
   <!-- ⏳ Nedräkning -->
   <div class="countdown" id="countdown">Snart tillbaka.</div>
 
-  <!-- 👤 Du själv som går (GIF med transparens) -->
+  <!-- 👤 Din animerade GIF-figur -->
   <img class="walking-you" src="images/semester-jag.gif" alt="Semester-Jag" />
 
-  <!-- 🌊 Vågor längst ner (loopande GIF) -->
+  <!-- 🌊 Waves med strand och palm -->
   <img class="waves" src="images/waves.gif" alt="Vågor" />
 
-  <!-- 🎵 MIDI-ljud -->
-  <audio autoplay loop>
-    <source src="audio/semester.mp3" type="audio/mpeg">
+  <!-- 🎵 MP3 – fix för autoplay -->
+  <audio id="bgMusic" loop>
+    <source src="audio/semester.mp3" type="audio/mpeg" />
     Din webbläsare stödjer inte ljuduppspelning.
   </audio>
 
-  <!-- 📝 Text längst ner -->
+  <!-- 📝 Footer -->
   <div class="footer">
     Trevlig sommar!
   </div>
 
-  <!-- ⏰ Countdown Script -->
+  <!-- ✅ Script: countdown + ljudfix -->
   <script>
+    // ⏱️ Countdown
     const cd = document.getElementById("countdown");
     const target = new Date("2025-07-14T15:00:00");
     function tick() {
@@ -127,6 +136,12 @@
     }
     setInterval(tick, 1000);
     tick();
+
+    // 🎵 Ljudfix – start efter användarinteraktion (krävs i Chrome/Safari/iOS)
+    const music = document.getElementById("bgMusic");
+    document.addEventListener("click", () => {
+      music.play().catch(e => console.log("Autoplay blockerat:", e));
+    }, { once: true });
   </script>
 
 </body>
