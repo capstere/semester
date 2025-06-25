@@ -11,7 +11,7 @@
       padding: 0;
       font-family: "Comic Sans MS", cursive, sans-serif;
       color: magenta;
-      background: url('DIN-BAKGRUNDSBILD-HÄR.jpg') no-repeat center center fixed;
+      background: url('images/bakgrund.jpg') no-repeat center center fixed;
       background-size: cover;
     }
 
@@ -60,6 +60,7 @@
       width: 120px;
       height: auto;
       animation: walk-loop 15s linear infinite;
+      z-index: 1000;
     }
 
     @keyframes walk-loop {
@@ -70,23 +71,30 @@
 </head>
 <body>
 
-  <img id="sun" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Snurrande sol" />
+  <!-- Snurrande sol GIF -->
+  <img id="sun" src="images/sol.gif" alt="Snurrande sol" />
+
+  <!-- Titel -->
   <h1>SEMESTERLÄGE AKTIVT!!!</h1>
+
+  <!-- Nedräkning -->
   <div class="countdown" id="countdown">Laddar karaibiskt solsken...</div>
 
-  <!-- 🔁 Här lägger du in din "du själv"-bild -->
-  <img class="walking-you" src="DIN-FIGUR-BILD-HÄR.png" alt="Semester-Jag" />
+  <!-- Din animerade figur (GIF) -->
+  <img class="walking-you" src="images/semester-jag.gif" alt="Semester-Jag" />
 
-  <!-- 🎵 MIDI-ljud (frivilligt) -->
+  <!-- Ljud (MIDI) -->
   <audio autoplay loop>
-    <source src="https://www.midiworld.com/download/2819" type="audio/midi">
-    Din webbläsare stödjer inte MIDI. Tråkigt. 
+    <source src="audio/semester.mid" type="audio/midi">
+    Din webbläsare stödjer inte MIDI. Tråkigt.
   </audio>
 
+  <!-- Footer -->
   <div class="footer">
     Sluta scanna, börja jobba... eller kanske inte.
   </div>
 
+  <!-- Countdown Script -->
   <script>
     const cd = document.getElementById("countdown");
     const target = new Date("2025-07-14T15:00:00");
