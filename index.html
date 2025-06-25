@@ -4,44 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SEMESTER</title>
-  <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet" />
+  https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css
+  https://fonts.googleapis.com/css2?family=Roboto&display=swap
   <style>
-      html, body {
+    html, body {
       margin: 0;
       padding: 0;
-      font-family: "Comic Sans MS", cursive, sans-serif;
-    
-      background: url('images/bakgrund.jpg') top center no-repeat;
-      background-size: 100% auto; /* 🧠 Bredd = 100%, höjd = auto (så inget klipps) */
-      background-color: #8fd3f4;   /* Fallback om bild inte laddar */
+      font-family: 'Roboto', sans-serif;
+      background: url('images/himmel.jpg') center top no-repeat;
+      background-size: cover;
+      background-color: #8fd3f4;
+      height: 100%;
+    }
+
+    main {
+      text-align: center;
+      padding-top: 5rem;
+      color: #000;
     }
 
     h1 {
-      margin-top: 5rem;
-      text-align: center;
       font-size: 3em;
-      color: #000;
-      text-shadow: 2px 2px 4px #ffffff;
-      z-index: 0;
-      position: relative;
+      background-color: rgba(255, 255, 255, 0.7);
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      text-shadow: 1px 1px 2px #fff;
     }
 
     .countdown {
       font-size: 1.8em;
-      color: #000;
-      text-shadow: 1px 1px 4px #ffffff;
-      text-align: center;
       margin-top: 2rem;
-      padding-top: 1rem;
+      background-color: rgba(255, 255, 255, 0.6);
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
     }
 
     .footer {
-      text-align: center;
-      color: #000;
-      font-size: 2.2em;
-      margin-top: 3rem;
-      margin-bottom: 4rem;
-      text-shadow: 2px 2px 4px #ffffff;
+      font-size: 2em;
+      margin: 4rem 0 2rem;
+      text-shadow: 1px 1px 2px #fff;
     }
 
     #sun {
@@ -69,9 +72,8 @@
 
     .walking-you {
       position: absolute;
-      bottom: 20px; /* Sänkt lite från stranden */
+      bottom: 20px;
       width: 120px;
-      height: auto;
       animation: walk-loop 15s linear infinite;
       z-index: 10;
     }
@@ -80,40 +82,41 @@
       0% { left: -150px; }
       100% { left: 100vw; }
     }
+
+    .music-control {
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- 🌞 Solen -->
   <img id="sun" src="images/sol.gif" alt="Snurrande sol" />
 
-  <!-- 🏖️ Rubrik -->
-  <h1>Semester...</h1>
+  <main>
+    <h1>JESP är SEMESTER</h1>
+    <div class="countdown" id="countdown">Snart tillbaka.</div>
 
-  <!-- ⏳ Nedräkning -->
-  <div class="countdown" id="countdown">Snart tillbaka.</div>
+    <div class="music-control">
+      <button id="playMusic">▶ Spela musik</button>
+    </div>
+  </main>
 
-  <!-- 👤 Gående GIF (se till att filen finns i images/) -->
   <img class="walking-you" src="images/semester-jag.gif" alt="Semester-Jag" />
-
-  <!-- 🌊 Waves längst ner -->
   <img class="waves" src="images/waves.gif" alt="Vågor" />
 
-  <!-- 🎵 Ljud -->
-  <audio id="bgMusic" autoplay loop>
+  <audio id="bgMusic" loop>
     <source src="audio/semester.mp3" type="audio/mpeg" />
     Din webbläsare stödjer inte ljud.
   </audio>
 
-  <!-- ☀️ Sommarhälsning -->
-  <div class="footer">
+  <footer class="footer">
     Trevlig sommar!
-  </div>
+  </footer>
 
   <script>
-    // ⏱️ Countdown
     const cd = document.getElementById("countdown");
     const target = new Date("2025-07-14T15:00:00");
+
     function tick() {
       const now = new Date();
       const diff = target - now;
@@ -127,16 +130,18 @@
             s = Math.floor(diff % 60000 / 1000);
       cd.textContent = `${d} dagar ${h} tim ${m} min ${s} sek kvar tills solbrännan bleknar`;
     }
+
     setInterval(tick, 1000);
     tick();
 
-    // 🔉 Ljudstart + volymjustering
     const music = document.getElementById("bgMusic");
-    music.volume = 0.2;
-    music.play().catch(() => {
-      document.addEventListener("click", () => {
-        music.play();
-      }, { once: true });
+    const playBtn = document.getElementById("playMusic");
+
+    playBtn.addEventListener("click", () => {
+      music.volume = 0.2;
+      music.play();
+      playBtn.disabled = true;
+      playBtn.textContent = "🎵 Spelar...";
     });
   </script>
 
