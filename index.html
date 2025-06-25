@@ -6,43 +6,26 @@
   <title>SEMESTER</title>
   <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet" />
   <style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  background-image: url('images/himmel.jpg');
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-  background-color: #8fd3f4;
-  overflow-x: hidden;
-}
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+
+      /* 🟦 FIX: Enhetlig blå bakgrund i både html och body */
+      background-color: #8fd3f4;
+    }
 
     h1 {
-      margin-top: 4rem;
+      margin-top: 3rem;
       text-align: center;
       font-size: 3em;
-      color: #000; /* 🔧 Bättre kontrast */
-      animation: blink 1s step-start infinite;
+      color: #000;
       text-shadow: 2px 2px 4px #ffffff;
+      animation: blink 1s step-start infinite;
     }
 
     @keyframes blink {
       50% { visibility: hidden; }
-    }
-
-    #sun {
-      position: absolute;
-      bottom: 710px; /* 🔧 Ungefär exakt ovanför din 710px hög waves.gif */
-      left: 20px; /* 🔧 Flyttad från höger till vänster */
-      width: 80px;
-      animation: spin 8s linear infinite;
-      z-index: 3;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
     }
 
     .countdown {
@@ -61,18 +44,18 @@ body {
       text-shadow: 1px 1px 3px #000;
     }
 
-    .walking-you {
+    #sun {
       position: absolute;
-      bottom: 60px; /* 🔧 Justeras så den går på stranden i waves.gif */
-      width: 120px;
-      height: auto;
-      animation: walk-loop 15s linear infinite;
-      z-index: 10;
+      bottom: 710px;
+      left: 20px;
+      width: 80px;
+      animation: spin 8s linear infinite;
+      z-index: 3;
     }
 
-    @keyframes walk-loop {
-      0% { left: -150px; }
-      100% { left: 100vw; }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .waves {
@@ -84,45 +67,45 @@ body {
       z-index: 1;
     }
 
-    /* Valfritt: moln du lägger till själv */
-    .moln {
+    .walking-you {
       position: absolute;
-      width: 100px;
-      top: 150px;
+      bottom: 60px;
+      width: 120px;
+      height: auto;
+      animation: walk-loop 15s linear infinite;
+      z-index: 10;
+    }
+
+    @keyframes walk-loop {
+      0% { left: -150px; }
+      100% { left: 100vw; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 🌞 Solen – nu placerad till vänster ovanför vågorna -->
+  <!-- 🌞 Solen -->
   <img id="sun" src="images/sol.gif" alt="Snurrande sol" />
 
-  <!-- 🏖️ Rubrik -->
   <h1>Semester...</h1>
 
-  <!-- ⏳ Nedräkning -->
   <div class="countdown" id="countdown">Snart tillbaka.</div>
 
-  <!-- 👤 Din animerade GIF-figur -->
   <img class="walking-you" src="images/semester-jag.gif" alt="Semester-Jag" />
-
-  <!-- 🌊 Waves med strand och palm -->
   <img class="waves" src="images/waves.gif" alt="Vågor" />
 
-  <!-- 🎵 MP3 – fix för autoplay -->
-  <audio id="bgMusic" loop>
+  <!-- 🎵 Ljud med låg volym (direktstart med JS-trick) -->
+  <audio id="bgMusic" autoplay loop>
     <source src="audio/semester.mp3" type="audio/mpeg" />
-    Din webbläsare stödjer inte ljuduppspelning.
+    Din webbläsare stödjer inte ljud.
   </audio>
 
-  <!-- 📝 Footer -->
   <div class="footer">
     Trevlig sommar!
   </div>
 
-  <!-- ✅ Script: countdown + ljudfix -->
   <script>
-    // ⏱️ Countdown
+    // ⏰ Nedräkning
     const cd = document.getElementById("countdown");
     const target = new Date("2025-07-14T15:00:00");
     function tick() {
@@ -141,11 +124,16 @@ body {
     setInterval(tick, 1000);
     tick();
 
-    // 🎵 Ljudfix – start efter användarinteraktion (krävs i Chrome/Safari/iOS)
+    // 🔉 Sätt volym och spela om möjligt
     const music = document.getElementById("bgMusic");
-    document.addEventListener("click", () => {
-      music.play().catch(e => console.log("Autoplay blockerat:", e));
-    }, { once: true });
+    music.volume = 0.2;
+
+    // Försök spela direkt (funkar ibland i desktop), annars vid klick
+    music.play().catch(() => {
+      document.addEventListener("click", () => {
+        music.play();
+      }, { once: true });
+    });
   </script>
 
 </body>
