@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🌴 SEMESTERLÄGE AKTIVT 🌞</title>
+  <title>SEMESTER</title>
   <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet" />
   <style>
     body {
@@ -78,21 +78,6 @@
       height: auto;
       z-index: 1;
     }
-
-    /* 🌴 Palm i vänstra hörnet */
-    .palm {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 150px;
-      animation: sway 3s ease-in-out infinite alternate;
-      z-index: 2;
-    }
-
-    @keyframes sway {
-      0% { transform: rotate(-2deg); }
-      100% { transform: rotate(2deg); }
-    }
   </style>
 </head>
 <body>
@@ -101,16 +86,13 @@
   <img id="sun" src="images/sol.gif" alt="Snurrande sol" />
 
   <!-- 🏝️ Sajtens rubrik -->
-  <h1>SEMESTERLÄGE AKTIVT!!!</h1>
+  <h1>Semester...</h1>
 
   <!-- ⏳ Nedräkning -->
-  <div class="countdown" id="countdown">Laddar karaibiskt solsken...</div>
+  <div class="countdown" id="countdown">Snart tillbaka.</div>
 
   <!-- 👤 Du själv som går (GIF med transparens) -->
   <img class="walking-you" src="images/semester-jag.gif" alt="Semester-Jag" />
-
-  <!-- 🌴 Palm (GIF eller PNG) i nedre vänstra hörnet -->
-  <img class="palm" src="images/palm.gif" alt="Palm som svajar" />
 
   <!-- 🌊 Vågor längst ner (loopande GIF) -->
   <img class="waves" src="images/waves.gif" alt="Vågor" />
@@ -123,7 +105,7 @@
 
   <!-- 📝 Text längst ner -->
   <div class="footer">
-    Sluta scanna, börja jobba... eller kanske inte.
+    Trevlig sommar!
   </div>
 
   <!-- ⏰ Countdown Script -->
@@ -134,7 +116,7 @@
       const now = new Date();
       const diff = target - now;
       if (diff <= 0) {
-        cd.textContent = "JAG ÄR TILLBAKA, SÄG HEJ ELLER... GÖR INTE DET.";
+        cd.textContent = "Return of the JESP";
         return;
       }
       const d = Math.floor(diff / 86400000),
